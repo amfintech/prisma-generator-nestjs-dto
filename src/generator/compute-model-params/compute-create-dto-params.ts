@@ -110,7 +110,7 @@ export const computeCreateDtoParams = ({
       if (!templateHelpers.config.noDependencies)
         concatIntoArray(relationInputType.apiExtraModels, apiExtraModels);
     }
-    
+
     // fields annotated with @DtoReadOnly are filtered out before this
     // so this safely allows to mark fields that are required in Prisma Schema
     // as **not** required in CreateDTO
@@ -178,7 +178,10 @@ export const computeCreateDtoParams = ({
     });
   }
 
-  const importPrismaClient = makeImportsFromPrismaClient(fields,templateHelpers);
+  const importPrismaClient = makeImportsFromPrismaClient(
+    fields,
+    templateHelpers,
+  );
   if (importPrismaClient) imports.unshift(importPrismaClient);
 
   return {

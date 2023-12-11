@@ -160,7 +160,10 @@ export const computeUpdateDtoParams = ({
     });
   }
 
-  const importPrismaClient = makeImportsFromPrismaClient(fields,templateHelpers);
+  const importPrismaClient = makeImportsFromPrismaClient(
+    fields,
+    templateHelpers,
+  );
   if (importPrismaClient) imports.unshift(importPrismaClient);
 
   return {

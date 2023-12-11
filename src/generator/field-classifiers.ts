@@ -1,6 +1,5 @@
 import { DTO_READ_ONLY } from './annotations';
 import type { DMMF } from '@prisma/generator-helper';
-import { logger } from '@prisma/sdk';
 
 export const isAnnotatedWith = (
   instance: DMMF.Field | DMMF.Model,
