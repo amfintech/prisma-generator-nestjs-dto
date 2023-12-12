@@ -4,6 +4,6 @@ dist
 target
 .env
 /src/@generated
-
+/example/src/@generated
 # IDE settings
 .idea

@@ -24,7 +24,7 @@
   "scripts": {
     "prebuild": "npm run cleanup:generated",
     "build": "tsc --project tsconfig.build.json",
-    "format": "prettier --write \"{src,test}/**/*.{js,ts}\"",
+    "format": "prettier --write \"{example,src,test}/**/*.{js,ts}\"",
     "prelint": "npm run format -- --loglevel error",
     "lint": "eslint \"{src,test}/**/*.{js,ts}\" --fix",
     "pretest": "npm run lint",
@@ -32,7 +32,8 @@
     "test:watch": "jest --watch",
     "cleanup:generated": "rimraf src/@generated",
     "pregenerate": "npm run cleanup:generated",
-    "generate": "npx prisma generate && npm run format -- --loglevel error"
+    "generate": "npx prisma generate && npm run format -- --loglevel error",
+    "db:push": "npx prisma db push"
   },
   "repository": {
     "type": "git",

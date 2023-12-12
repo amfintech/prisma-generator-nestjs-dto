@@ -1,11 +1,17 @@
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://johndoe:mypassword@localhost:5432/mydb?schema=public"
+  url      = "postgres://postgres:postgres@localhost:5432/mydb?schema=public"
+  schemas  = ["public"]
+}
+
+generator clent {
+    provider        = "prisma-client-js"
+    previewFeatures = ["multiSchema"]
 }
 
 generator nestjsDto {
   provider                        = "node -r ts-node/register/transpile-only src/cli.ts"
-  output                          = "../src/@generated/prisma-generator-nestjs-dto"
+  output                          = "../example/src/@generated/prisma-generator-nestjs-dto"
   outputToNestJsResourceStructure = "true"
   flatResourceStructure           = "true"
   exportRelationModifierClasses   = "true"
@@ -14,7 +20,7 @@ generator nestjsDto {
   updateDtoPrefix                 = "Update"
   dtoSuffix                       = "Dto"
   entityPrefix                    = ""
-  entitySuffix                    = "Entity"
+  entitySuffix                    = ""
   fileNamingStyle                 = "camel"
   classValidation                 = "true"
   noDependencies                  = "false"
@@ -70,6 +76,7 @@ model Product {
   /// @oneOf ["Category", "Company"]
   data Json?
 
+  @@schema("public")
   @@map("products")
 }
 
@@ -77,6 +84,9 @@ model Category {
   id        String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   updatedAt DateTime @updatedAt
   Product   Product[]
+
+  @@schema("public")
+  @@map("categories")
 }
 
 model Company {
@@ -84,6 +94,9 @@ model Company {
   /// @DtoRelationAsPropertyOnCreate
   /// @IsRequired
   Product Product[]
+
+  @@schema("public")
+  @@map("companies")
 }
 /// @DtoGenMapping ({digital:"1",
 ///  analog:"2"})
@@ -94,4 +107,6 @@ enum ProductType {
   /// 模拟化
   /// @DtoMap("2")
   analogue
+
+  @@schema("public")
 }
